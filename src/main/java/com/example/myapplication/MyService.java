@@ -16,4 +16,12 @@ public class MyService {
     public String getGreeting() {
         return "Hello! I'm " + this.appProperties.getName();
     }
+
+    public String raiseServiceEx() throws ServiceException {
+        throw new ServiceException("Service Ex!!!");
+    }
+
+    public String raiseEx() throws Exception {
+        throw new Exception("Ex!!!");
+    }
 }

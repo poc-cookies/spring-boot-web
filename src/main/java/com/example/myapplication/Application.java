@@ -18,6 +18,16 @@ public class Application {
         return myService.getGreeting();
     }
 
+    @RequestMapping("/service-ex")
+    String serviceEx() throws ServiceException {
+        return myService.raiseServiceEx();
+    }
+
+    @RequestMapping("/ex")
+    String ex() throws Exception {
+        return myService.raiseEx();
+    }
+
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Application.class, args);
     }
