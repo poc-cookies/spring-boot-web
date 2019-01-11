@@ -14,7 +14,7 @@ public class MyService {
     }
 
     public String getGreeting() {
-        return "Hello! I'm " + this.appProperties.getName();
+        return "Hello! I'm " + this.appProperties.getName() + ", (app version " + this.appProperties.getVersion() + ").";
     }
 
     public String raiseServiceEx() throws ServiceException {

@@ -16,4 +16,8 @@ public class AppProperties {
     @Getter
     @Setter
     private String configuration;
+
+    @Getter
+    @Setter
+    private String version;
 }
