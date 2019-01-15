@@ -1,7 +1,7 @@
 package com.example.myapplication.api;
 
 import com.example.myapplication.Item;
-import com.example.myapplication.MyService;
+import com.example.myapplication.service.MyService;
 import com.example.myapplication.aop.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

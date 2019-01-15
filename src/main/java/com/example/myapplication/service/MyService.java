@@ -1,5 +1,8 @@
-package com.example.myapplication;
+package com.example.myapplication.service;
 
+import com.example.myapplication.AppProperties;
+import com.example.myapplication.Item;
+import com.example.myapplication.ItemRepository;
 import com.example.myapplication.aop.ServiceException;
 import com.example.myapplication.aop.ServiceExceptionType;
 import com.example.myapplication.aop.annotation.ServiceMethod;
