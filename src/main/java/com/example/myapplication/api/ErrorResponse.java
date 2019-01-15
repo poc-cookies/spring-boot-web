@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 @Data
-public class ApiError {
+public class ErrorResponse {
 
     private final HttpStatus status;
     private final String message;

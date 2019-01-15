@@ -38,6 +38,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<?> handleException(HttpStatus status, Throwable ex, String error) {
         final String message = ex.getLocalizedMessage();
         log.error("{} : App version: {}", message, this.appProperties.getVersion(), ex);
-        return new ResponseEntity<>(new ApiError(status, message, error), new HttpHeaders(), status);
+        return new ResponseEntity<>(new ErrorResponse(status, message, error), new HttpHeaders(), status);
     }
 }
