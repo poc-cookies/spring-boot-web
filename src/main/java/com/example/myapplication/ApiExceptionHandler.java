@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import com.example.myapplication.aop.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -30,7 +31,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Throwable.class)
     @ResponseBody
     public ResponseEntity<?> handleAll(Throwable ex) {
-        return handleException(HttpStatus.INTERNAL_SERVER_ERROR, ex, "Not implemented.");
+        return handleException(HttpStatus.INTERNAL_SERVER_ERROR, ex, "Internal server error.");
     }
 
     private ResponseEntity<?> handleException(HttpStatus status, Throwable ex, String error) {

@@ -1,5 +1,8 @@
 package com.example.myapplication;
 
+import com.example.myapplication.aop.ServiceException;
+import com.example.myapplication.aop.ServiceExceptionType;
+import com.example.myapplication.aop.annotation.ServiceMethod;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,24 +27,19 @@ public class MyService {
         return "Hello! I'm " + this.appProperties.getName() + ", (app version " + this.appProperties.getVersion() + ").";
     }
 
+    @ServiceMethod(exceptionType = ServiceExceptionType.CANNOT_GET_ITEMS_BY_ID)
     public List<Item> getItemsByIds(final List<Integer> ids) throws ServiceException {
-        try {
-            return this.itemRepository.findRelated(ids);
-        } catch (Exception ex) {
-            throw new ServiceException("Cannot get items by ids", ex);
-        }
+        return this.itemRepository.findRelated(ids);
     }
 
+    @ServiceMethod(exceptionType = ServiceExceptionType.CANNOT_GET_ALL_ITEMS)
     public List<Item> getAllItems() throws ServiceException {
-        try {
-            return this.itemRepository.findAll();
-        } catch (Exception ex) {
-            throw new ServiceException("Cannot get all items", ex);
-        }
+        return this.itemRepository.findAll();
     }
 
+    @ServiceMethod
     public String raiseServiceEx() throws ServiceException {
-        throw new ServiceException("Service Ex!!!");
+        throw new ServiceException("Service Exception!", null);
     }
 
     public String raiseEx() throws Exception {
