@@ -1,6 +1,6 @@
 package com.example.myapplication.api;
 
-import com.example.myapplication.Item;
+import com.example.myapplication.repository.entity.Item;
 import com.example.myapplication.service.MyService;
 import com.example.myapplication.aop.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;

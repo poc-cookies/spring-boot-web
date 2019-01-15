@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.repository.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
