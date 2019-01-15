@@ -6,6 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RestController
 @SpringBootApplication
 public class Application {
@@ -16,6 +19,16 @@ public class Application {
     @RequestMapping("/")
     String home() {
         return myService.getGreeting();
+    }
+
+    @RequestMapping("/items")
+    List<Item> items() throws ServiceException {
+        return myService.getItemsByIds(Arrays.asList(1, 2));
+    }
+
+    @RequestMapping("/all-items")
+    List<Item> allItems() throws ServiceException {
+        return myService.getAllItems();
     }
 
     @RequestMapping("/service-ex")
