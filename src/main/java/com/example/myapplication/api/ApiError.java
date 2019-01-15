@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.api;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;

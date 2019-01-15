@@ -1,5 +1,6 @@
-package com.example.myapplication;
+package com.example.myapplication.api;
 
+import com.example.myapplication.AppProperties;
 import com.example.myapplication.aop.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-@ControllerAdvice
+@ControllerAdvice(basePackages = "com.example.myapplication.api")
 @Slf4j
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
