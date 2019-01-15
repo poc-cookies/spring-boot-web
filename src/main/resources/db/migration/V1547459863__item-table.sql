@@ -1,0 +1,8 @@
+--
+-- User TABLE
+--
+CREATE TABLE IF NOT EXISTS "item" (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) UNIQUE NOT NULL,
+  description VARCHAR(255) NOT NULL
+);
