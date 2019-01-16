@@ -12,10 +12,6 @@ public enum ServiceExceptionType {
         this.message = message;
     }
 
-    public ServiceException createException(Throwable cause) {
-        return new ServiceException(message, cause);
-    }
-
     public String getMessage() {
         return message;
     }

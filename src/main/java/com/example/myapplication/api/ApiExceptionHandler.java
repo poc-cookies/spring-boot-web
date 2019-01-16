@@ -25,19 +25,33 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ServiceException.class)
     @ResponseBody
-    public ResponseEntity<?> handleServiceException(ServiceException ex) {
-        return handleException(HttpStatus.BAD_REQUEST, ex, "Service exception.");
+    public ResponseEntity<?> handleServiceException(final ServiceException ex) {
+        HttpStatus status;
+        switch (ex.getType()) {
+            case CANNOT_GET_ALL_ITEMS:
+            case CANNOT_GET_ITEMS_BY_ID:
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+                break;
+            case UNKNOWN_SERVICE_EXCEPTION:
+                status = HttpStatus.SERVICE_UNAVAILABLE;
+                break;
+            default:
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+                break;
+        }
+        return responseEntity(new ErrorResponse(status, ex.getType().getMessage(), ex.getLocalizedMessage()), status);
     }
 
     @ExceptionHandler(Throwable.class)
     @ResponseBody
     public ResponseEntity<?> handleAll(Throwable ex) {
-        return handleException(HttpStatus.INTERNAL_SERVER_ERROR, ex, "Internal server error.");
-    }
-
-    private ResponseEntity<?> handleException(HttpStatus status, Throwable ex, String error) {
+        final HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         final String message = ex.getLocalizedMessage();
         log.error("{} : App version: {}", message, this.appProperties.getVersion(), ex);
-        return new ResponseEntity<>(new ErrorResponse(status, message, error), new HttpHeaders(), status);
+        return responseEntity(new ErrorResponse(status, message, "Internal server error."), status);
+    }
+
+    private ResponseEntity<?> responseEntity(final ErrorResponse error, final HttpStatus status) {
+        return new ResponseEntity<>(error, new HttpHeaders(), status);
     }
 }

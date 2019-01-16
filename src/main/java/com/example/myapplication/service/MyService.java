@@ -42,7 +42,7 @@ public class MyService {
 
     @ServiceMethod
     public String raiseServiceEx() throws ServiceException {
-        throw new ServiceException("Service Exception!", null);
+        throw ServiceException.create(ServiceExceptionType.UNKNOWN_SERVICE_EXCEPTION, null);
     }
 
     public String raiseEx() throws Exception {

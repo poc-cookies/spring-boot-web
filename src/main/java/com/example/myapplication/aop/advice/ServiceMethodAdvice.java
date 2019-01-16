@@ -36,7 +36,7 @@ public class ServiceMethodAdvice {
         } catch (Throwable ex) {
             final ServiceExceptionType exceptionType = serviceMethod.exceptionType();
             log.error("{} : App version: {}", exceptionType.getMessage(), this.appProperties.getVersion(), ex);
-            throw exceptionType.createException(ex);
+            throw ServiceException.create(exceptionType, ex);
         }
 
         return value;
