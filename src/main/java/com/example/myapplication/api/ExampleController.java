@@ -1,8 +1,8 @@
 package com.example.myapplication.api;
 
-import com.example.myapplication.repository.entity.Item;
 import com.example.myapplication.service.MyService;
 import com.example.myapplication.aop.ServiceException;
+import com.example.myapplication.service.dto.ItemDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,12 +22,12 @@ public class ExampleController {
     }
 
     @RequestMapping("/items")
-    List<Item> items() throws ServiceException {
+    List<ItemDTO> items() throws ServiceException {
         return myService.getItemsByIds(Arrays.asList(1, 2));
     }
 
     @RequestMapping("/all-items")
-    List<Item> allItems() throws ServiceException {
+    List<ItemDTO> allItems() throws ServiceException {
         return myService.getAllItems();
     }
 
