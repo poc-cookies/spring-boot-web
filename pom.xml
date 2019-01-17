@@ -54,6 +54,11 @@
             <artifactId>modelmapper-spring-boot-starter</artifactId>
             <version>${model.mapper.starter.vesion}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
