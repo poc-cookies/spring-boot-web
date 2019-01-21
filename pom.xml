@@ -17,6 +17,7 @@
         <lombok.version>1.18.4</lombok.version>
         <postgresql.jdbc.version>42.2.5</postgresql.jdbc.version>
         <maven.flyway.plugin.version>5.2.4</maven.flyway.plugin.version>
+        <flyway.core.version>5.2.4</flyway.core.version>
         <model.mapper.starter.vesion>1.1.0</model.mapper.starter.vesion>
     </properties>
 
@@ -57,6 +58,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>${flyway.core.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
