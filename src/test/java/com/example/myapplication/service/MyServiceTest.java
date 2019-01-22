@@ -23,6 +23,11 @@ public class MyServiceTest {
     private MyService myService;
 
     @Test
+    public void serviceInitTest() throws Exception {
+        assertThat(myService).isNotNull();
+    }
+
+    @Test
     public void getGreetingTest() throws Exception {
         assertThat(myService.getGreeting()).isEqualTo("Hello! I'm MyAppTest, (app version 0.0.1-TEST).");
     }

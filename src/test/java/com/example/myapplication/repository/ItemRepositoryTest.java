@@ -25,6 +25,11 @@ public class ItemRepositoryTest {
     private ItemRepository itemRepository;
 
     @Test
+    public void repositoryInitTest() throws Exception {
+        assertThat(itemRepository).isNotNull();
+    }
+
+    @Test
     public void findAllTest() throws Exception {
         final List<Item> expected = Arrays.asList(
                 new Item(1, "item1", "description1"),
