@@ -19,6 +19,7 @@
         <maven.flyway.plugin.version>5.2.4</maven.flyway.plugin.version>
         <flyway.core.version>5.2.4</flyway.core.version>
         <model.mapper.starter.vesion>1.1.0</model.mapper.starter.vesion>
+        <prometheus.registry.version>1.1.2</prometheus.registry.version>
     </properties>
 
     <dependencies>
@@ -49,6 +50,15 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <version>${prometheus.registry.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.jmnarloch</groupId>
