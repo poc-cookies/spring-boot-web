@@ -1,7 +1,8 @@
 package com.example.myapplication.api;
 
 import com.example.myapplication.DBConfig;
-import com.example.myapplication.aop.ServiceExceptionType;
+import com.example.myapplication.aop.ServiceException;
+import com.example.myapplication.service.MyService;
 import com.example.myapplication.service.dto.ItemDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
@@ -9,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.TestPropertySource;
@@ -16,7 +18,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
+import java.util.List;
 
+import static com.example.myapplication.aop.ServiceExceptionType.*;
+
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -35,19 +41,24 @@ public class ExampleControllerTest {
     @Autowired
     private ObjectMapper mapper;
 
+    @MockBean
+    private MyService myService;
+
     @Test
     public void baseUrlTest() throws Exception {
+        given(myService.getGreeting()).willReturn("Test Greeting!");
         this.mvc.perform(get("/"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Hello! I'm MyAppTest, (app version 0.0.1-TEST)."));
+                .andExpect(content().string("Test Greeting!"));
     }
 
     @Test
     public void itemsTest() throws Exception {
-        final String expected = mapper.writeValueAsString(
-                Arrays.asList(
-                        new ItemDTO(1, "item1", "description1"),
-                        new ItemDTO(2, "item2", "description2")));
+        final List<ItemDTO> items = Arrays.asList(
+                new ItemDTO(1, "item10", "description10"),
+                new ItemDTO(2, "item20", "description20"));
+        given(myService.getItemsByIds(Arrays.asList(1, 2))).willReturn(items);
+        final String expected = mapper.writeValueAsString(items);
         this.mvc.perform(get("/items"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(expected));
@@ -55,11 +66,12 @@ public class ExampleControllerTest {
 
     @Test
     public void allItemsTest() throws Exception {
-        final String expected = mapper.writeValueAsString(
-                Arrays.asList(
-                        new ItemDTO(1, "item1", "description1"),
-                        new ItemDTO(2, "item2", "description2"),
-                        new ItemDTO(3, "item3", "description3")));
+        final List<ItemDTO> items = Arrays.asList(
+                new ItemDTO(10, "item10", "description10"),
+                new ItemDTO(20, "item20", "description20"),
+                new ItemDTO(30, "item30", "description30"));
+        given(myService.getAllItems()).willReturn(items);
+        final String expected = mapper.writeValueAsString(items);
         this.mvc.perform(get("/all-items"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(expected));
@@ -67,9 +79,10 @@ public class ExampleControllerTest {
 
     @Test
     public void serviceExTest() throws Exception {
-        final String error = ServiceExceptionType.UNKNOWN_SERVICE_EXCEPTION.getMessage();
+        final String error = UNKNOWN_SERVICE_EXCEPTION.getMessage();
         final String expected = mapper.writeValueAsString(
                 new ErrorResponse(HttpStatus.SERVICE_UNAVAILABLE, error, error));
+        given(myService.raiseServiceEx()).willThrow(ServiceException.create(UNKNOWN_SERVICE_EXCEPTION, null));
         this.mvc.perform(get("/service-ex"))
                 .andExpect(status().is5xxServerError())
                 .andExpect(content().json(expected));
