@@ -1,6 +1,5 @@
 package com.example.myapplication.api;
 
-import com.example.myapplication.DBConfig;
 import com.example.myapplication.aop.ServiceException;
 import com.example.myapplication.service.MyService;
 import com.example.myapplication.service.dto.ItemDTO;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -31,7 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @TestPropertySource(locations = "classpath:config/application-test.properties")
 @AutoConfigureMockMvc
-@Import(DBConfig.class)
 public class ExampleControllerTest {
 
     @Autowired
