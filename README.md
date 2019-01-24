@@ -116,6 +116,15 @@ Application is configured to provide the following set of endpoints for monitori
 * Application info: `/actuator/info`
 * Prometheus metrics: `/actuator/prometheus`
 
+## API Documentation
+
+[SpringFox Project](http://springfox.github.io/springfox/) implementation of the Swagger 2 specification is used for instrumentation & documentation of API.
+
+API documentation is not applied when `production` profile is active.
+
+Swagger UI is accessible by the following path: `${API_BASE}/swagger-ui.html`
+API docs in the form of JSON available at `${API_BASE}/v2/api-docs`.
+
 ## Documentation
 
 [Spring Boot Documentation](https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/documentation-overview.html#boot-documentation)
