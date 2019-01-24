@@ -6,7 +6,6 @@ import com.example.myapplication.aop.ServiceException;
 import com.example.myapplication.aop.ServiceExceptionType;
 import com.example.myapplication.aop.annotation.ServiceMethod;
 import com.example.myapplication.service.dto.ItemDTO;
-import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Service
 public class MyService {
 
