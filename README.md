@@ -21,7 +21,12 @@ Login with your system user into Postgres, and execute the following commands:
 ```sql
 CREATE ROLE example_user WITH LOGIN PASSWORD 'guest';
 CREATE DATABASE example_db WITH OWNER example_user;
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA example_schema TO example_user;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO example_user;
+```
+
+Login with `example_user` into Postgres and execute the following command:
+
+```sql
 CREATE SCHEMA IF NOT EXISTS example_schema AUTHORIZATION example_user;
 ```
 
@@ -47,10 +52,6 @@ For example, in order to apply migrations in development environment the followi
 ```
 FLYWAY_URL=jdbc:postgresql://localhost:5432/example_db?currentSchema=example_schema FLYWAY_USER=example_user FLYWAY_PASSWORD=guest mvn flyway:migrate
 ```
-
-jdbc:postgresql://localhost:5432/example_db?currentSchema=example_schema
-example_user
-guest
 
 For getting more info have a look at [Flyway Maven Plugin](https://flywaydb.org/getstarted/firststeps/maven)
 
@@ -93,7 +94,7 @@ The following environment variables are used:
 ## Logging
 
 In addition to the console output, logs are written to the `app.log` file.
-Log file destination is controlled by `logging.file.name` of Spring Boot Application.
+Log file destination is controlled by `logging.file.name` property of Spring Boot Application.
 
 To get more information on how to customize logging click here [Logging](https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/spring-boot-features.html#boot-features-logging)
 
@@ -109,7 +110,7 @@ mvn test
 
 Metrics are done with [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/production-ready-features.html#production-ready-metrics)
 
-Application is configured to provide the following set of endpoint for monitoring:
+Application is configured to provide the following set of endpoints for monitoring:
 
 * Health check: `/actuator/health`
 * Application info: `/actuator/info`
